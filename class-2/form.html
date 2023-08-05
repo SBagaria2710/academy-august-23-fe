@@ -6,6 +6,78 @@
     <title>Form</title>
 </head>
 <body>
-    Will be continued on Saturday's session
+    <form onclick="">
+        <label for="fullName">Name:</label>
+        <input name="fullName" type="text">
+
+        <br><br/>
+
+        <label for="contactNumber">Contact Number:</label>
+        <input name="contactNumber" type="number">
+
+        <br><br/>
+
+        <label for="userEmail">Email:</label>
+        <input name="userEmail" type="email">
+
+        <br><br/>
+
+        <label for="userAge">Age:</label>
+        <input name="userAge" type="number" min="0" max="150">
+
+        <br><br/>
+
+        <label for="gender">Gender:</label>
+        <input type="radio" value="Male" name="gender">
+        <label>Male</label>
+        <input type="radio" value="Female" name="gender">
+        <label>Female</label>
+
+        <br/><br/>
+
+        <label for="state">State:</label>
+        <select name="state">
+            <option>Select an option</option>
+            <option selected>Gujrat</option>
+            <option>Karnataka</option>
+            <option>Telengana</option>
+        </select>
+
+        <br/><br/>
+
+        <label for="message">Message:</label>
+        <textarea rows="2" cols="5" name="message" maxlength="10"></textarea>
+
+        <br/><br/>
+
+        <label for="birthdate">DoB:</label>
+        <input name="birthdate" type="date" min="2000-01-01" max="2023-07-05">
+
+        <br/><br/>
+
+        <label for="subscribe">Subcribe:</label>
+        <input name="subscribe" type="checkbox">
+
+        <br/><br/>
+
+        <label for="eyeColor">Eye's color:</label>
+        <input name="eyeColor" type="color">
+
+        <br/><br/>
+
+        <label for="file">Upload a file:</label>
+        <input name="file" type="file">
+
+
+        <br/><br/>
+
+        <label for="pass">Secret key:</label>
+        <input name="pass" type="password">
+
+        <br/><br/>
+
+        <input type="submit">
+        <button onclick="">Submit</button>
+    </form>
 </body>
 </html>
