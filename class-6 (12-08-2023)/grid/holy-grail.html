@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Holy Grail Layout</title>
+
+    <style>
+        .container {
+            display: grid;
+            grid-template-areas:
+            'header header header header'
+            'asideL main main asideR'
+            'asideL main main asideR'
+            'asideL main main asideR'
+            'asideL main main asideR'
+            'footer footer footer footer';
+            grid-gap: 10px;
+            background-color: #0043c9;
+            padding: 10px;
+            height: 100vh;
+        }
+
+        .shashwat {
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            font-size: 30px;
+            text-align: center;
+        }
+
+        .header { grid-area: header }
+        .aside-l { grid-area: asideL }
+        .main { grid-area: main }
+        .aside-r { grid-area: asideR }
+        .footer { grid-area: footer }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="shashwat header">Header</header>
+        <aside class="shashwat aside-l">Aside Left</aside>
+        <main class="shashwat main">Main Content</main>
+        <aside class="shashwat aside-r">Aside Right</aside>
+        <footer class="shashwat footer">Footer</footer>
+    </div>
+</body>
+</html>

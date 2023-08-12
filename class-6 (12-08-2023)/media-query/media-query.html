@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Query</title>
+
+    <link rel="stylesheet" href="./all.css" media="all" />
+    <link rel="stylesheet" href="./large.css" media="(min-width: 768px) and (max-width: 992px)" />
+    <link rel="stylesheet" href="./small.css" media="(max-width: 768px)" />
+
+    <style>
+        .element {
+            width: 200px;
+            height: 200px;
+            /* background-color: purple; */
+        }
+
+        /* @media screen and (min-width: 768px) and (max-width: 992px) {
+            .element {
+                background-color: aqua;
+            }
+        } */
+    </style>
+</head>
+<body>
+    <div class="element">
+        Hello There
+    </div>
+</body>
+</html>
