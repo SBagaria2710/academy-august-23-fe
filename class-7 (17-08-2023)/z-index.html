@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Z-Index</title>
+
+    <style>
+        .container {
+            position: relative;
+        }
+
+        .base {
+            width: 100px;
+            height: 100px;
+        }
+
+        .foo {
+            background-color: red;
+            position: absolute;
+            z-index: 9;
+        }
+
+        .bar {
+            background-color: aqua;
+            position: absolute;
+            z-index: -1;
+        }
+
+        .baz {
+            background-color: aqua;
+            position: absolute;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="base foo">FOO</div>
+        <div class="base bar">BAR</div>
+        <div class="base baz">BAZ</div>
+    </div>
+</body>
+</html>
