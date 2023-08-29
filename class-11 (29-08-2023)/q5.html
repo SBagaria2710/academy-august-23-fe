@@ -25,6 +25,20 @@
       //Write a script that whenever the mouse enters 
       //the cell jail should be drawn over it and it should be removed once it 
       //leaves(Hint: Use a background-image to set jail)
+
+      let cell = document.querySelector(".cell");
+
+      const onMouseEntered = function() {
+        cell.style.backgroundImage = 'url(./jail-bars.png)';
+        cell.style.backgroundSize = 'cover';
+      };
+
+      const onMouseLeft = function() {
+        cell.style.background = 'none';
+      };
+
+      cell.addEventListener("mouseover", onMouseEntered);
+      cell.addEventListener("mouseout", onMouseLeft);
     </script>
   </body>
 </html>

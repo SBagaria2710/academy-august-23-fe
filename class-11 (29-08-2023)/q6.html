@@ -108,6 +108,27 @@
     </div>
     <script>
       // Q Make the filter work
+
+      const filterElem = document.querySelector("select");
+
+      filterElem.addEventListener('change', function(event) {
+        const filterValue = event.target.value;
+        let allTickets = document.querySelectorAll('p');
+
+        if (filterValue === "none") {
+          for (let i = 0; i < allTickets.length; i++) {
+            allTickets[i].parentElement.style.display = 'block';
+          }
+        } else {
+          for (let i = 0; i < allTickets.length; i++) {
+            if (allTickets[i].getAttribute('data-category') !== filterValue) {
+              allTickets[i].parentElement.style.display = 'none';
+            } else {
+              allTickets[i].parentElement.style.display = 'block';
+            }
+          }
+        }
+      });
     </script>
   </body>
 </html>

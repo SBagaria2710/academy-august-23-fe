@@ -7,11 +7,20 @@
     <title>Document</title>
   </head>
   <body>
-    <button>Say Hello</button>
+    <button id="btn">Say Hello</button>
 
     <script>
       //Q1 on Clicking the Button append hello to the page
-      
+
+      let btnElement = document.querySelector("#btn");
+
+      btnElement.addEventListener("click", function () {
+        let newDivElem = document.createElement("div");
+        newDivElem.innerText = "Hello";
+        
+        let bodyElem = document.querySelector("body");
+        bodyElem.append(newDivElem);
+      });
     </script>
   </body>
 </html>

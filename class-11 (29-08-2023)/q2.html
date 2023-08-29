@@ -18,9 +18,18 @@
       <li>9</li>
       <li>10</li>
     </ul>
-
     <script>
       // Fix the list by inserting the missing element using querySelectorAll and insertBefore
+
+      let ul = document.querySelector("ul");
+
+      let allListItems = document.querySelectorAll("li");
+      const eighthElem = allListItems[6];
+
+      let seventhElem = document.createElement("li");
+      seventhElem.innerText = 7;
+
+      ul.insertBefore(seventhElem, eighthElem); // Insert seventhElem before eighthElem
     </script>
   </body>
 </html>
