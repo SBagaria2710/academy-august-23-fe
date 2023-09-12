@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event Delegation</title>
+</head>
+
+<style>
+  .div {
+    border: 2px solid black;
+    padding: 20px;
+  }
+</style>
+<body>
+
+  <div class="div" id="grandparent">
+    Grnadparent (Bubbling)
+    <div class="div" id="parent">
+      Parent (Bubbling)
+      <div class="div" id="child">Child (Capturing)</div>
+    </div>
+  </div>
+
+  <script>
+    const gp = document.getElementById("grandparent");
+    const p = document.getElementById("parent");
+    const c = document.getElementById("child");
+
+    gp.addEventListener('click', function() {
+      console.log("GP Cliked!");
+    }, false); // Bubbling
+
+    p.addEventListener('click', function() {
+      console.log("P Cliked!");
+    }, false); // Bubbling
+
+    c.addEventListener('click', function() {
+      console.log("C Cliked!");
+    }, true); // Capturing
+  </script>
+
+</body>
+</html>
