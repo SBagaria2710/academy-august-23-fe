@@ -1,0 +1,26 @@
+p {
+  margin: 0.25rem 0;
+}
+
+.main-comment {
+  padding: 5px;
+  border: 1px solid #000;
+  background-color: lightblue;
+}
+
+.text-bold {
+  font-weight: 600;
+}
+
+.sub-comments {
+  margin-left: 10px;
+}
+
+button {
+  margin: 10px;
+}
+
+.comment {
+  display: flex;
+  flex-direction: column;
+}
