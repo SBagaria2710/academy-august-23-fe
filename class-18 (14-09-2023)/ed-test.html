@@ -38,7 +38,16 @@
     </table>
 
     <script>
-      
+      const table = document.getElementById("mytable");
+
+      table.addEventListener('click', function(event) {
+        if (event.target.style.backgroundColor) {
+          event.target.style.backgroundColor = '';
+        } else {
+          event.target.style.backgroundColor = event.target.textContent.toLowerCase();
+        }
+        
+      });
     </script>
 
 </body>
