@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event Delegation Usecase</title>
+</head>
+<body>
+  <div id="container">
+    <div id="fresh">Fresh</div>
+    <div id="cs">Customer Service</div>
+    <div id="sell">Sell</div>
+    <div id="home">Home</div>
+  </div>
+
+  <script>
+    const NAV_MAPPER = {
+      'fresh': 'nav_cs_fresh',
+      'cs': 'nav_cs',
+      'sell': 'nav_cs_sell',
+      'home': 'nav_cs_home'
+    };
+
+    const container = document.getElementById("container");
+    container.addEventListener('click', function(event) {
+      const redirectionLink = '/' + NAV_MAPPER[event.target.id];
+      window.location.href = redirectionLink;
+    });
+
+  </script>
+</body>
+</html>
