@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Debouncing</title>
+  </head>
+  <body>
+    <input type="text">
+
+    <script>
+      let count = 0;
+      let inputElem = document.querySelector('input');
+
+      function makeNetworkRequest() {
+        console.log("Network Request => ", count, inputElem.value);
+        count++;
+      };
+
+      // Throttle
+      function throttle(cb, delay) {
+        let flag = true;
+        return function() {
+          if (flag === true) {
+            cb();
+            flag = false;
+
+            setTimeout(function() {
+              flag = true;
+            }, delay);
+          }
+        };
+      }
+
+      const throttledMNR = throttle(makeNetworkRequest, 1000);
+
+      inputElem.addEventListener('keydown', throttledMNR);
+    </script>
+  </body>
+</html>
