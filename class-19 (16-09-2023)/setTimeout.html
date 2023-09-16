@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>setTimeout</title>
+  <style>
+    #test {
+      width: 200px;
+      height: 200px;
+      background-color: tomato;
+    }
+  </style>
+</head>
+<body>
+  <div id="test">I am a div</div>
+  <button onclick="stopAnimation()">Cancel Extending the Width</button>
+
+  <script>
+    const elem = document.getElementById("test");
+
+    function changeWidth() {
+      elem.style.width = "500px";
+    };
+    
+    let timerId = setTimeout(changeWidth, 2000);
+
+    function stopAnimation() {
+      clearTimeout(timerId);
+    };
+
+  </script>
+</body>
+</html>

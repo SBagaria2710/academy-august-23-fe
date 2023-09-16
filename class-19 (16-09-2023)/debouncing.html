@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Debouncing</title>
+  </head>
+  <body>
+    <input type="text">
+
+    <script>
+      let count = 0;
+      let inputElem = document.querySelector('input');
+
+      function makeNetworkRequest() {
+        console.log("Network Request => ", count);
+        count++;
+      };
+
+      // Debounce
+      function debounce(cb, delay = 2000) {
+        let timerId;
+        return function() {
+          clearTimeout(timerId);
+          timerId = setTimeout(cb, delay);
+        };
+      }
+
+      const debouncedMNR = debounce(makeNetworkRequest, 2000);
+
+      inputElem.addEventListener('keydown', debouncedMNR);
+    </script>
+  </body>
+</html>
