@@ -25,14 +25,15 @@
             cb();
             flag = false;
 
-            setTimeout(function() {
+            setTimeout(() => {
               flag = true;
+              cb();
             }, delay);
           }
         };
       }
 
-      const throttledMNR = throttle(makeNetworkRequest, 1000);
+      const throttledMNR = throttle(makeNetworkRequest, 2000);
 
       inputElem.addEventListener('keydown', throttledMNR);
     </script>
