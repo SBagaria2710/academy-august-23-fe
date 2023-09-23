@@ -3,6 +3,7 @@ class Person {
   constructor(firstName, age) {
     this.firstName = firstName;
     this.age = age;
+    this.isSenior = age > 45;
     this.nationality = "India";
   }
 
@@ -52,7 +53,9 @@ class Student extends Person {
   }
 }
 
-const teacherInstance = new Teacher("Shashwat", "Web Development", 26, 47);
+const teacherInstance = new Teacher("Rajesh", "Web Development", 26, 47);
 const studentInstance = new Student("Shashwat", 26, 8);
 console.log(teacherInstance);
 console.log(studentInstance);
+
+Person.staticHello();
