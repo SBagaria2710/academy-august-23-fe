@@ -11,22 +11,37 @@ const fs = require("fs");
 // }
 
 // Promise
-let f1p = fs.promises.readFile('./files/f1.txt');
-let f2p = fs.promises.readFile('./files/f2.txt');
-let f3p = fs.promises.readFile('./files/f3.txt');
-
-function onFulfilled(data) {
-  console.log("this is data => " + data);
-}
-
 function onRejected(reason) {
   console.log(reason);
 }
 
-f1p.then(onFulfilled);
-f2p.then(onFulfilled);
-f3p.then(onFulfilled);
+function onFulfilledP1(data) {
+  console.log("this is data file 1 => " + data);
+  let f2p = fs.promises.readFile('./files/f2.txt');
+  return f2p;
+}
 
-f1p.catch(onRejected);
-f2p.catch(onRejected);
-f3p.catch(onRejected);
+function onFulfilledP2(data) {
+  console.log("this is data file 2 => " + data);
+  let f3p = fs.promises.readFile('./files/f3.txt');
+  return f3p;
+}
+
+function onFulfilledP3(data) {
+  console.log("this is data file 3 => " + data);
+  return new Promise(function(resolve) {
+    resolve("Hello Dibyaranjan!");
+  });
+}
+
+function lastTask(txt) {
+  console.log(txt);
+}
+
+let f1p = fs.promises.readFile('./files/f1.txt');
+f1p
+.then(onFulfilledP1)
+.then(onFulfilledP2)
+.then(onFulfilledP3)
+.catch(onRejected)
+.then(lastTask);
