@@ -20,26 +20,17 @@ function generateBill(processedOrder) {
   });
 }
 
-placeOrder("Coffee")
-  .then(function (orderStatus) {
+async function serveCoffee() {
+  try {
+    let orderStatus = await placeOrder("coffee");
     console.log(orderStatus);
-    return orderStatus;
-  })
-  .then(function (orderStatus) {
-    let processedOrder = processOrder(orderStatus);
-    return processedOrder;
-  })
-  .then(function (processedOrder) {
+    let processedOrder = await processOrders(orderStatus);
     console.log(processedOrder);
-    return processedOrder;
-  })
-  .then(function (processedOrder) {
-    let generatedBill = generateBill(processedOrder);
-    return generatedBill;
-  })
-  .then(function (generatedBill) {
+    let generatedBill = await generateBill(processedOrder);
     console.log(generatedBill);
-  })
-  .catch(function (reason) {
-    console.log("Error =>", reason);
-  });
+  } catch(error) {
+    console.log("Error => ", error);
+  }
+}
+
+serveCoffee();
