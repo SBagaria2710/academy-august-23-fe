@@ -24,7 +24,7 @@ async function serveCoffee() {
   try {
     let orderStatus = await placeOrder("coffee");
     console.log(orderStatus);
-    let processedOrder = await processOrders(orderStatus);
+    let processedOrder = await processOrder(orderStatus);
     console.log(processedOrder);
     let generatedBill = await generateBill(processedOrder);
     console.log(generatedBill);
