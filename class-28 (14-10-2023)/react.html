@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script>
+  </head>
+  <body>
+    <!-- <div id="parent">
+    <div id="child">
+      <h1>Hello from ReactJS 1</h1>
+      <h1>Hello from ReactJS 2</h1>
+    </div>
+  </div> -->
+
+    <div id="root"></div>
+
+    <script>
+      const greeting = React.createElement(
+        "div",
+        { id: "parent" },
+        React.createElement("div", { id: "child" }, [
+          React.createElement("h1", { id: "greeting1" }, "Hello From ReactJS 1"),
+          React.createElement("h1", { id: "greeting2" }, "Hello From ReactJS 2"),
+        ])
+      );
+
+      let root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(greeting);
+    </script>
+  </body>
+</html>
