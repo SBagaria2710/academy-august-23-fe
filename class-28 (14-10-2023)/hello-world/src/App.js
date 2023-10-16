@@ -8,6 +8,7 @@ function App() {
         <div id="child">
           <h1>Hello from ReactJS 1</h1>
           <h1>Hello from ReactJS 2</h1>
+          <h1>Hello from ReactJS 3</h1>
         </div>
       </div>
     </div>
