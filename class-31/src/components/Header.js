@@ -1,12 +1,14 @@
+import { NavLink } from "react-router-dom";
+
 function Header() {
   return (
-    <div className="flex border space-x-8 justify-between items-center py-2 px-2">
+    <header className="flex border space-x-8 justify-between items-center py-2 px-2">
       <div className="flex space-x-4">
-        <div>Movies</div>
-        <div>Watchlist</div>
+        <NavLink to="/">Movies</NavLink>
+        <NavLink to="/watchlist">Watchlist</NavLink>
       </div>
       <input placeholder="Search" />
-    </div>
+    </header>
   );
 }
 
