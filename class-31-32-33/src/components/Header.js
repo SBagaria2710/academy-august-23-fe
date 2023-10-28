@@ -7,7 +7,6 @@ function Header() {
         <NavLink to="/">Movies</NavLink>
         <NavLink to="/watchlist">Watchlist</NavLink>
       </div>
-      <input placeholder="Search" />
     </header>
   );
 }
