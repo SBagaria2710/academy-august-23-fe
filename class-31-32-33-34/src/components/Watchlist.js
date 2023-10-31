@@ -19,16 +19,29 @@ function Watchlist() {
     setWatchlist(updatedWatchlist);
   };
 
-  const sortById = () => {
+  const sortByRating = () => {
     const temp = [...watchlist];
-    const updatedWatchlist = temp.sort((a, b) => a.id - b.id);
+    const updatedWatchlist = temp.sort((a, b) => b.voteAverage - a.voteAverage);
     setWatchlist(updatedWatchlist);
+  };
+
+  const handleFilter = (event) => {
+    const selectedGenreId = event.target.value;
+
+    if (selectedGenreId === "All") {
+      setWatchlist(getWatchlistFromLocalStorage());
+    } else {
+      const filteredWatchlist = getWatchlistFromLocalStorage().filter(({ genreIds }) =>
+        genreIds.includes(parseInt(selectedGenreId))
+      );
+      setWatchlist(filteredWatchlist);
+    }
   };
 
   const searchMovieUrl = `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}`;
   const options = { method: "GET", headers: { accept: "application/json" } };
 
-  const getGenre = (searchText) => {
+  const getGenre = () => {
     setIsLoading(true);
     fetch(searchMovieUrl, options)
       .then((res) => res.json())
@@ -48,8 +61,6 @@ function Watchlist() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  console.log("===>", genreMap);
-
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -60,19 +71,26 @@ function Watchlist() {
       ) : (
         <div className="px-4 mt-4">
           <div className="flex justify-between">
+            <select
+              type="button"
+              className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+              onChange={handleFilter}
+            >
+              <option value="All">All</option>
+              {getWatchlistFromLocalStorage().map(({ genreIds = [] }) => {
+                return genreIds.map((genreId) => (
+                  <option key={genreId} value={genreId}>
+                    {genreMap[genreId]}
+                  </option>
+                ));
+              })}
+            </select>
             <button
               type="button"
               className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-              onClick={() => alert("WIP")}
+              onClick={sortByRating}
             >
-              Filter By Genre
-            </button>
-            <button
-              type="button"
-              className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-              onClick={sortById}
-            >
-              Sort by ID
+              Sort by Rating
             </button>
           </div>
           <div className="relative overflow-x-auto mx-auto  shadow-md sm:rounded-lg">
@@ -121,7 +139,9 @@ function Watchlist() {
                       </td>
                       <td className="text-xl px-6 py-4">{voteAverage}</td>
                       <td className="text-xl px-6 py-4">
-                        {genreIds.map(genreId => genreMap[genreId]).join(", ")}
+                        {genreIds
+                          .map((genreId) => genreMap[genreId] || "")
+                          .join(", ")}
                       </td>
                       <td
                         className="text-xl space-x-1 px-6 py-4 text-right cursor-pointer text-red-200 hover:text-red-500"
