@@ -1,8 +1,10 @@
-import { useState } from "react";
-import { IMAGE_BASE_URL, WATCHLIST_KEY } from "../constant";
+import { useState, useEffect } from "react";
+import { API_KEY, IMAGE_BASE_URL, WATCHLIST_KEY } from "../constant";
 import { getWatchlistFromLocalStorage } from "../util";
 
 function Watchlist() {
+  const [genreMap, setGenreMap] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
   const [watchlist, setWatchlist] = useState(getWatchlistFromLocalStorage());
 
   const removeMediaFromLocalStorage = (mediaId) => {
@@ -23,23 +25,51 @@ function Watchlist() {
     setWatchlist(updatedWatchlist);
   };
 
+  const searchMovieUrl = `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}`;
+  const options = { method: "GET", headers: { accept: "application/json" } };
+
+  const getGenre = (searchText) => {
+    setIsLoading(true);
+    fetch(searchMovieUrl, options)
+      .then((res) => res.json())
+      .then(({ genres }) => {
+        const computeGenreMap = genres.reduce((acc, genreObj) => {
+          const { id, name } = genreObj;
+          return { ...acc, [id]: name };
+        }, {});
+        setGenreMap(computeGenreMap);
+      })
+      .catch((err) => console.error(err))
+      .finally(() => setIsLoading(false));
+  };
+
+  useEffect(() => {
+    getGenre();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  console.log("===>", genreMap);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
   return (
     <>
       {watchlist.length === 0 ? (
         "No Watchlisted Movies"
       ) : (
-        <div className="container px-4 mt-4">
+        <div className="px-4 mt-4">
           <div className="flex justify-between">
-          <button
+            <button
               type="button"
-              class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+              className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
               onClick={() => alert("WIP")}
             >
               Filter By Genre
             </button>
             <button
               type="button"
-              class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+              className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
               onClick={sortById}
             >
               Sort by ID
@@ -49,22 +79,19 @@ function Watchlist() {
             <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
               <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
-                  <th scope="col" className="px-6 py-3">
-                    Id
+                  <th scope="col" className="text-xl px-6 py-3">
+                    Poster
                   </th>
-                  <th scope="col" className="px-6 py-3">
+                  <th scope="col" className="text-xl px-6 py-3">
                     Title
                   </th>
-                  <th scope="col" className="px-6 py-3">
+                  <th scope="col" className="text-xl px-6 py-3">
                     Average Rating
                   </th>
-                  <th scope="col" className="px-6 py-3">
-                    Release Date
+                  <th scope="col" className="text-xl px-6 py-3">
+                    Genre(s)
                   </th>
-                  <th scope="col" className="px-6 py-3">
-                    Poster Link
-                  </th>
-                  <th scope="col" className="px-6 py-3">
+                  <th scope="col" className="text-xl px-6 py-3">
                     <span className="sr-only">Edit</span>
                   </th>
                 </tr>
@@ -74,8 +101,7 @@ function Watchlist() {
                   ({
                     id,
                     title = "",
-                    name = "",
-                    releaseDate = "N/A",
+                    genreIds = [],
                     voteAverage,
                     posterPath,
                   }) => (
@@ -83,29 +109,26 @@ function Watchlist() {
                       key={id}
                       className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
                     >
-                      <th
-                        scope="row"
-                        className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                      >
-                        {id}
-                      </th>
-                      <td className="px-6 py-4">{title || name}</td>
-                      <td className="px-6 py-4">{voteAverage}</td>
-                      <td className="px-6 py-4">{releaseDate}</td>
                       <td className="px-6 py-4">
-                        <a
-                          href={`${IMAGE_BASE_URL}/${posterPath}`}
-                          target="_blank"
-                          rel="noreferrer"
-                        >
-                          Poster Link
-                        </a>
+                        <img
+                          className="w-[160px] h-[30vh] min-h-[200px]"
+                          src={`${IMAGE_BASE_URL}/${posterPath}`}
+                          alt={title}
+                        />
+                      </td>
+                      <td className="text-xl px-6 py-4 items-center">
+                        {title}
+                      </td>
+                      <td className="text-xl px-6 py-4">{voteAverage}</td>
+                      <td className="text-xl px-6 py-4">
+                        {genreIds.map(genreId => genreMap[genreId]).join(", ")}
                       </td>
                       <td
-                        className="px-6 py-4 text-right cursor-pointer text-red-200 hover:text-red-500"
+                        className="text-xl space-x-1 px-6 py-4 text-right cursor-pointer text-red-200 hover:text-red-500"
                         onClick={() => removeMediaFromLocalStorage(id)}
                       >
-                        Delete 🗑️
+                        <span>Delete</span>
+                        <span>🗑️</span>
                       </td>
                     </tr>
                   )

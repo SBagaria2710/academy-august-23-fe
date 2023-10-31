@@ -24,7 +24,7 @@ function Movies() {
     return watchlistMovies.find((movie) => movie.id === mediaId);
   };
 
-  const saveToLocalStorage = (movieObj) => {
+  const saveMediaToLocalStorage = (movieObj) => {
     let currentWatchList = getWatchlistFromLocalStorage();
 
     if (isMediaAlreadyPresentInWatchlist(movieObj.id, currentWatchList)) return;
@@ -34,10 +34,9 @@ function Movies() {
       {
         id: movieObj.id,
         title: movieObj.title,
-        name: movieObj.name,
         posterPath: movieObj.poster_path,
-        releaseDate: movieObj.release_date,
         voteAverage: movieObj.vote_average,
+        genreIds: movieObj.genre_ids
       },
     ];
 
@@ -45,7 +44,29 @@ function Movies() {
     setWatchlist(currentWatchList);
   };
 
-  const trendingMovieUrl = `https://api.themoviedb.org/3/trending/all/day?language=en-US&api_key=${API_KEY}&page=${pageNumber}`;
+  const removeMediaFromLocalStorage = (mediaId) => {
+    if (watchlist.length === 1) {
+      localStorage.removeItem(WATCHLIST_KEY);
+      setWatchlist([]);
+      return;
+    }
+
+    let updatedWatchlist = watchlist.filter((media) => media.id !== mediaId);
+    localStorage.setItem(WATCHLIST_KEY, JSON.stringify(updatedWatchlist));
+    setWatchlist(updatedWatchlist);
+  };
+
+  const handleMovieClick = (movieObj = {}) => {
+    const { id: mediaId } = movieObj || {};
+
+    if (isMediaAlreadyPresentInWatchlist(mediaId, watchlist)) {
+      removeMediaFromLocalStorage(mediaId);
+    } else {
+      saveMediaToLocalStorage(movieObj);
+    }
+  };
+
+  const trendingMovieUrl = `https://api.themoviedb.org/3/trending/movie/week?language=en-US&api_key=${API_KEY}&page=${pageNumber}`;
   const searchMovieUrl = `https://api.themoviedb.org/3/search/movie?language=en-US&api_key=${API_KEY}&query=${searchQuery}&page=${pageNumber}`;
 
   const options = { method: "GET", headers: { accept: "application/json" } };
@@ -96,10 +117,7 @@ function Movies() {
           {movies.map((movie, index) => {
             const { title = "", name = "", poster_path: posterPath } = movie;
             return (
-              <div
-                className="mb-3 cursor-pointer"
-                onClick={() => saveToLocalStorage(movie)}
-              >
+              <div className="mb-3 cursor-pointer">
                 <div
                   key={index}
                   className="w-[160px] h-[30vh] bg-cover rounded-xl m-4 md:h-[40vh] md:w-[180px] hover:scale-110 duration-300 relative"
@@ -107,7 +125,10 @@ function Movies() {
                     backgroundImage: `url(${IMAGE_BASE_URL}/${posterPath})`,
                   }}
                 >
-                  <div className="p-2 absolute right-0 text-xl bg-gray-900 rounded-xl">
+                  <div
+                    className="p-2 absolute right-0 text-xl bg-gray-900 rounded-xl"
+                    onClick={() => handleMovieClick(movie)}
+                  >
                     {isMediaAlreadyPresentInWatchlist(movie.id, watchlist)
                       ? "❤️"
                       : "🤍"}
