@@ -4,7 +4,10 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 function Navbar() {
-  const cartItems = useSelector((store) => store.cart);
+  const cartItems = useSelector((store) => {
+    return store.cart
+  });
+  
   return (
     <div
       style={{

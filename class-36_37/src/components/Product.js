@@ -1,25 +1,18 @@
-import React, { useState, useEffect } from 'react'
-import { useDispatch } from "react-redux";
-import axios from 'axios';
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from "react-redux";
 
 // Utils
 import { add } from '../slices/cart';
 
 // Contants
-import { PRODUCTS_URL } from '../constant';
+import { STATUS, fetchProducts } from '../slices/product';
 
 function Product() {
   const dispatch = useDispatch();
-  const [products, setProducts] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const { data: products, status } = useSelector((store) => store.products);
 
   const getProducts = async () => {
-    setIsLoading(true);
-    const res = await axios.get(PRODUCTS_URL);
-    if (res.status === 200) {
-      setProducts(res.data);
-    }
-    setIsLoading(false);
+    dispatch(fetchProducts());
   };
 
   const addToCart = (product) => {
@@ -30,7 +23,8 @@ function Product() {
     getProducts();
   }, []);
 
-  if (isLoading) return <div>Loading...</div>;
+  if (status === STATUS.LOADING) return <div>Loading...</div>
+  if (status === STATUS.FAILED) return <div>Failed to fetch products</div>
   return (
     <div className='productsWrapper'>
       {products.map((product) => (
