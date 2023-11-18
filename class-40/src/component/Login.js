@@ -35,7 +35,7 @@ function Login() {
         <input type="password" placeholder="password" value={password} onChange={(e) => setPassword(e.target.value)} />
       </div>
 
-      <button disabled={!userName || !password}>Login</button>
+      <button disabled={!(userName && password)}>Login</button>
     </form>
   );
 }
