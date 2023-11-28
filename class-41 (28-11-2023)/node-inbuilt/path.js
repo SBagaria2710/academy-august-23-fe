@@ -1,4 +1,4 @@
-const path = require("path");
+// const path = require("path");
 
 // const result = path.join("folder1", "folder2", "subfolder", "file");// Combines the string
 // console.log(result);
