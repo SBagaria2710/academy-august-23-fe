@@ -52,7 +52,6 @@ app.patch("/products/:productId", (req, res) => {
 
 // Delete Operation
 app.delete("/products/:productId", (req, res) => {
-  console.log("Here!");
   const productId = Number(req.params.productId);
   const productIdx = products.findIndex(product => product.id === productId);
   const product = products[productIdx];
@@ -62,7 +61,6 @@ app.delete("/products/:productId", (req, res) => {
 
 // DO NOT USE - INTERN
 app.delete("/products", (_, res) => {
-  console.log("There!");
   products = [];
   res.status(200).send("Khatam! Tata! Bye Bye!");
 });
