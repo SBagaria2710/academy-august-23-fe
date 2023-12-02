@@ -4,7 +4,7 @@ const app = express();
 
 const data = JSON.parse(fs.readFileSync('data.json'));
 
-const products = data.products;
+let products = data.products;
 
 app.use(express.json());
 
@@ -27,18 +27,44 @@ app.get("/products/:productId", (req, res) => {
   }
 });
 
-// POST Operations
+// POST Operation
 app.post("/product", (req, res) => {
   products.push(req.body);
   res.status(201).send("Successfully added");
 });
 
-// PUT Operations
+// PUT Operation
 app.put("/products/:productId", (req, res) => {
   const productId = Number(req.params.productId);
   const productIdx = products.findIndex(product => product.id === productId);
   products.splice(productIdx, 1, { ...req.body, id: productId });
   res.status(201).send("Successfully Updated!");
+});
+
+// PATCH Operation
+app.patch("/products/:productId", (req, res) => {
+  const productId = Number(req.params.productId);
+  const productIdx = products.findIndex(product => product.id === productId);
+  const product = products[productIdx];
+  products.splice(productIdx, 1, { ...product, ...req.body });
+  res.status(201).send("Successfully Updated!");
+});
+
+// Delete Operation
+app.delete("/products/:productId", (req, res) => {
+  console.log("Here!");
+  const productId = Number(req.params.productId);
+  const productIdx = products.findIndex(product => product.id === productId);
+  const product = products[productIdx];
+  products.splice(productIdx, 1);
+  res.status(201).json(product);
+});
+
+// DO NOT USE - INTERN
+app.delete("/products", (_, res) => {
+  console.log("There!");
+  products = [];
+  res.status(200).send("Khatam! Tata! Bye Bye!");
 });
 
 app.listen(8080, () => {
