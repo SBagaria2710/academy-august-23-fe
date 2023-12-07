@@ -3,6 +3,7 @@ import { Form } from "antd";
 
 // Components
 import Button from '../../components/button';
+import { Link } from 'react-router-dom';
 
 function Login() {
   return (
@@ -30,6 +31,10 @@ function Login() {
 
           <div className="flex flex-col mt-2 gap-1">
             <Button fullWidth title="Login" type="submit" />
+            <Link to="/login" className="text-primary">
+              {" "}
+              New to Scaler Movies? Register!
+            </Link>
           </div>
         </Form>
       </div>
