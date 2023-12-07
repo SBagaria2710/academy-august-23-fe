@@ -1,0 +1,20 @@
+input , textarea , select{
+    height: 40px;
+    padding-left: 15px;
+    border: 1px solid #8a8a8a;
+    width: 100%;
+}
+
+input:focus , textarea:focus , select:focus{
+    outline: none;
+    border: 1px solid #373737;
+}
+
+textarea{
+    min-height: 100px;
+    padding: 15px;
+}
+
+.ant-form-item{
+    margin-bottom: 10px;
+}
