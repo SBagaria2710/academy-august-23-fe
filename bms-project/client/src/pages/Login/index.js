@@ -31,7 +31,7 @@ function Login() {
 
           <div className="flex flex-col mt-2 gap-1">
             <Button fullWidth title="Login" type="submit" />
-            <Link to="/login" className="text-primary">
+            <Link to="/register" className="text-primary">
               {" "}
               New to Scaler Movies? Register!
             </Link>
