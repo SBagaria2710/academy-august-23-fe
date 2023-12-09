@@ -1,11 +1,29 @@
 import React from 'react';
-import { Form } from "antd";
+import { Form, message } from "antd";
 
 // Components
 import Button from '../../components/button';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { LoginUser } from '../../apicalls/users';
 
 function Login() {
+  const navigate = useNavigate();
+  const onFinish = async (values) => {
+    try {
+      const response = await LoginUser(values);
+      if (response.success) {
+        message.success(response.message);
+        console.log(response.message);
+        navigate('/');
+      } else {
+        message.error(response.message);
+        console.log(response.message);
+      }
+    } catch (err) {
+      message.error(err);
+    }
+  };
+
   return (
     <div className="flex justify-center h-screen items-center bg-primary">
       <div className="card p-3 w-400">
@@ -13,7 +31,7 @@ function Login() {
           Welcome back to Scaler Shows! Please Login{" "}
         </h1>
         <hr />
-        <Form layout="vertical" className="mt-1">
+        <Form layout="vertical" className="mt-1" onFinish={onFinish}>
           <Form.Item
             label="Email"
             name="email"

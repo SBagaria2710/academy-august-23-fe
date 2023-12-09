@@ -35,4 +35,30 @@ router.post("/register", async (request, response) => {
   }
 });
 
+router.post("/login", async (request, response) => {
+  const user = await User.findOne({ email: request.body.email });
+  if (!user) {
+    response.status(401).send({
+      success: false,
+      message: "Invalid Credentials"
+    });
+    return;
+  }
+
+  const validPassword = await bcrypt.compare(request.body.password, user.password);
+
+  if (!validPassword) {
+    response.status(401).send({
+      success: false,
+      message: "Invalid Credentials"
+    });
+    return;
+  }
+
+  response.status(200).send({
+    success: true,
+    message: "User Logged In"
+  })
+});
+
 module.exports = router;
