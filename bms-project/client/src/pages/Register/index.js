@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Form, message } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 
 // Components
-import Button from '../../components/button';
+import Button from '../../components/Button';
 import { RegisterUser } from '../../apicalls/users';
 
 function Register() {
@@ -23,6 +23,13 @@ function Register() {
       message.error(err);
     }
   };
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      navigate("/");
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="flex justify-center h-screen items-center bg-primary">
