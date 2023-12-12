@@ -18,3 +18,16 @@ export const LoginUser = async (payload) => {
     return err;
   }
 }
+
+export const GetCurrentUser = async () => {
+  try {
+    const response = await axiosInstance.get('/api/user/get-current-user', {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+    });
+    return response.data;
+  } catch (err) {
+    return err;
+  }
+}

@@ -3,9 +3,9 @@ import axios from "axios";
 export const axiosInstance = axios.create({
   baseURL: "http://localhost:3001",
   headers: {
-    withCredentials: true,
+    credentials: "include",
     method: 'post',
     'Content-Type': 'application/json',
-    Authorization: `Bearer ${localStorage.getItem('token')}`
+    // authorization: `Bearer ${localStorage.getItem('token')}`
   }
 });
