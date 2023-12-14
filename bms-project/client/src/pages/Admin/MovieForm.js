@@ -3,7 +3,7 @@ import { Col, Form, message, Modal, Row } from "antd";
 import Button from "../../components/Button";
 import { useDispatch } from "react-redux";
 import { HideLoading, ShowLoading } from "../../redux/loadersSlice";
-import { AddMovie } from "../../apicalls/movies";
+import { AddMovie, UpdateMovie } from "../../apicalls/movies";
 import moment from "moment";
 
 function MovieForm({
@@ -29,10 +29,10 @@ function MovieForm({
       if (formType === "add") {
         response = await AddMovie(values);
       } else {
-        // response = await UpdateMovie({
-        //   ...values,
-        //   movieId: selectedMovie._id,
-        // });
+        response = await UpdateMovie({
+          ...values,
+          movieId: selectedMovie._id,
+        });
       }
 
       if (response.success) {
@@ -76,7 +76,7 @@ function MovieForm({
 
           <Col span={8}>
             <Form.Item label="Movie Duration (Min)" name="duration">
-              <input type="number" />
+              <input type="text" />
             </Form.Item>
           </Col>
 

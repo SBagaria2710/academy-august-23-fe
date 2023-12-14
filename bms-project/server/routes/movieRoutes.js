@@ -34,4 +34,34 @@ router.get("/get-all-movies", authMiddleware, async (_, response) => {
   }
 });
 
+router.put("/update-movie", authMiddleware, async (request, response) => {
+  try {
+    await Movie.findByIdAndUpdate(request.body.movieId, request.body);
+    response.send({
+      success: true,
+      message: "Movie Updated Successfully",
+    });
+  } catch (err) {
+    response.status(500).send({
+      success: false,
+      message: err.message
+    });
+  }
+});
+
+router.delete("/delete-movie", authMiddleware, async (request, response) => {
+  try {
+    await Movie.findByIdAndDelete(request.query.movieId);
+    response.send({
+      success: true,
+      message: "Movie Deleted Successfully",
+    });
+  } catch (err) {
+    response.status(500).send({
+      success: false,
+      message: err.message
+    });
+  }
+});
+
 module.exports = router;
