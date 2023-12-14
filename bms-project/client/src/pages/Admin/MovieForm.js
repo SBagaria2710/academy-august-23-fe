@@ -2,8 +2,8 @@ import React from "react";
 import { Col, Form, message, Modal, Row } from "antd";
 import Button from "../../components/Button";
 import { useDispatch } from "react-redux";
-// import { HideLoading, ShowLoading } from "../../redux/loadersSlice";
-// import { AddMovie , UpdateMovie } from "../../apicalls/movies";
+import { HideLoading, ShowLoading } from "../../redux/loadersSlice";
+import { AddMovie } from "../../apicalls/movies";
 import moment from "moment";
 
 function MovieForm({
@@ -21,33 +21,33 @@ function MovieForm({
   }
 
   const dispatch = useDispatch();
-  // const onFinish = async (values) => {
-  //   try {
-  //     dispatch(ShowLoading());
-  //     let response = null;
+  const onFinish = async (values) => {
+    try {
+      dispatch(ShowLoading());
+      let response = null;
 
-  //     if (formType === "add") {
-  //       response = await AddMovie(values);
-  //     } else {
-  //       response = await UpdateMovie({
-  //         ...values,
-  //         movieId: selectedMovie._id,
-  //       });
-  //     }
+      if (formType === "add") {
+        response = await AddMovie(values);
+      } else {
+        // response = await UpdateMovie({
+        //   ...values,
+        //   movieId: selectedMovie._id,
+        // });
+      }
 
-  //     if (response.success) {
-  //       getData();
-  //       message.success(response.message);
-  //       setShowMovieFormModal(false);
-  //     } else {
-  //       message.error(response.message);
-  //     }
-  //     dispatch(HideLoading());
-  //   } catch (error) {
-  //     dispatch(HideLoading());
-  //     message.error(error.message);
-  //   }
-  // };
+      if (response.success) {
+        getData();
+        message.success(response.message);
+        setShowMovieFormModal(false);
+      } else {
+        message.error(response.message);
+      }
+      dispatch(HideLoading());
+    } catch (error) {
+      dispatch(HideLoading());
+      message.error(error.message);
+    }
+  };
 
   return (
     <Modal
@@ -60,7 +60,7 @@ function MovieForm({
       footer={null}
       width={800}
     >
-      <Form layout="vertical" initialValues={selectedMovie}>
+      <Form layout="vertical" initialValues={selectedMovie} onFinish={onFinish}>
         <Row gutter={16}>
           <Col span={24}>
             <Form.Item label="Movie Name" name="title">
