@@ -154,7 +154,6 @@ function TheatresList() {
 
       {openShowsModal && (
         <Shows
-          openShowsModal={openShowsModal}
           setOpenShowsModal={setOpenShowsModal}
           theatre={selectedTheatre}
         />
