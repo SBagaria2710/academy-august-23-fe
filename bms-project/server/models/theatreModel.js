@@ -19,7 +19,7 @@ const theatreSchema = new mongoose.Schema({
   },
   isActive: {
     type: Boolean,
-    default: true,
+    default: false,
   },
   owner: {
     type: mongoose.Schema.Types.ObjectId,

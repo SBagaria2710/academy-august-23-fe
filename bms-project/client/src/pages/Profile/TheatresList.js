@@ -76,8 +76,8 @@ function TheatresList() {
     {
       title: "Status",
       dataIndex: "isActive",
-      render: (text, record) => {
-        if (text) {
+      render: (isActive) => {
+        if (isActive) {
           return "Approved";
         } else {
           return "Pending / Blocked";

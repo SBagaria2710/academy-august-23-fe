@@ -9,6 +9,15 @@ export const AddTheatre = async (payload) => {
   }
 }
 
+export const GetAllTheatres = async () => {
+  try {
+    const response = await axiosInstance.get('/api/theatre/get-all-theatres');
+    return response.data;
+  } catch (err) {
+    return err;
+  }
+}
+
 export const GetAllTheatresByOwner = async (payload) => {
   try {
     const response = await axiosInstance.post('/api/theatre/get-all-theatres-by-owner', payload);
