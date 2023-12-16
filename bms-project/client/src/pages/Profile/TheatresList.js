@@ -6,17 +6,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { HideLoading, ShowLoading } from "../../redux/loadersSlice";
 import { message, Table } from "antd";
 import { DeleteTheatre, GetAllTheatresByOwner } from "../../apicalls/theatres";
-// import Shows from "./Shows";
+import Shows from "./Shows";
 
 function TheatresList() {
   const { user } = useSelector((state) => state.users);
   const [showTheatreFormModal = false, setShowTheatreFormModal] =
     useState(false);
-  const [selectedTheatre = null, setSelectedTheatre] = useState(null);
+  const [selectedTheatre, setSelectedTheatre] = useState(null);
   const [formType = "add", setFormType] = useState("add");
   const [theatres, setTheatres] = useState([]);
-
-  // const [openShowsModal = false, setOpenShowsModal] = useState(false);
+  const [openShowsModal, setOpenShowsModal] = useState(false);
 
   const dispatch = useDispatch();
   // const navigate = useNavigate();
@@ -87,30 +86,30 @@ function TheatresList() {
     {
       title: "Action",
       dataIndex: "action",
-      render: (text, record) => {
+      render: (_, rowData) => {
         return (
           <div className="flex gap-1 items-center">
             <i
               className="ri-delete-bin-line"
               onClick={() => {
-                handleDelete(record._id);
+                handleDelete(rowData._id);
               }}
             ></i>
             <i
               className="ri-pencil-line"
               onClick={() => {
                 setFormType("edit");
-                setSelectedTheatre(record);
+                setSelectedTheatre(rowData);
                 setShowTheatreFormModal(true);
               }}
             ></i>
 
-            {record.isActive && (
+            {rowData.isActive && (
               <span
                 className="underline"
                 onClick={() => {
-                  setSelectedTheatre(record);
-                  // setOpenShowsModal(true);
+                  setSelectedTheatre(rowData);
+                  setOpenShowsModal(true);
                 }}
               >
                 Shows
@@ -153,13 +152,13 @@ function TheatresList() {
         />
       )}
 
-      {/* {openShowsModal && (
+      {openShowsModal && (
         <Shows
           openShowsModal={openShowsModal}
           setOpenShowsModal={setOpenShowsModal}
           theatre={selectedTheatre}
         />
-      )} */}
+      )}
     </div>
   );
 }
