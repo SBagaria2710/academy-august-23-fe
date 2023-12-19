@@ -64,4 +64,20 @@ router.delete("/delete-movie", authMiddleware, async (request, response) => {
   }
 });
 
+router.get("/get-movie-by-id/:movieId", authMiddleware, async (request, response) => {
+  try {
+    const movie = await Movie.findById(request.params.movieId);
+    response.send({
+      success: true,
+      message: "Movie Fetched Successfully",
+      data: movie
+    });
+  } catch (err) {
+    response.status(500).send({
+      success: false,
+      message: err.message
+    });
+  }
+});
+
 module.exports = router;
