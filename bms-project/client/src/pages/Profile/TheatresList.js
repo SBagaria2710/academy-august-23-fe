@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Button from "../../components/Button";
+import Button from "../../components/Button.js";
 // import { useNavigate } from "react-router-dom";
 import TheatreForm from "./TheatresForm";
 import { useDispatch, useSelector } from "react-redux";

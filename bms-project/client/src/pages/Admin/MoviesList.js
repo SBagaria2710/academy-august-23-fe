@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import Button from "../../components/Button";
+import Button from "../../components/Button.js";
 import MovieForm from "./MovieForm";
 import moment from "moment";
 import { message, Table } from "antd";

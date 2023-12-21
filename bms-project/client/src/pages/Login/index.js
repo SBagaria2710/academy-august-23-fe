@@ -2,9 +2,9 @@ import React, { useEffect } from 'react';
 import { Form, message } from "antd";
 
 // Components
-import Button from '../../components/Button';
+import Button from '../../components/Button.js';
 import { Link, useNavigate } from 'react-router-dom';
-import { LoginUser } from '../../apicalls/users';
+import { LoginUser } from '../../apicalls/users.js';
 
 function Login() {
   const navigate = useNavigate();

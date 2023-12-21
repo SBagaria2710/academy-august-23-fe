@@ -2,7 +2,7 @@ import { Form, message, Modal } from "antd";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AddTheatre , UpdateTheatre} from "../../apicalls/theatres";
-import Button from "../../components/Button";
+import Button from "../../components/Button.js";
 import { HideLoading, ShowLoading } from "../../redux/loadersSlice";
 
 function TheatreForm({

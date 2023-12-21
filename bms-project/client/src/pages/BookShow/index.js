@@ -6,7 +6,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { GetShowById } from "../../apicalls/theatres";
 import { HideLoading, ShowLoading } from "../../redux/loadersSlice";
 import StripeCheckout from "react-stripe-checkout";
-import Button from "../../components/Button";
+import Button from "../../components/Button.js";
 import { BookShowTickets, MakePayment } from "../../apicalls/bookings";
 
 const STRIPE_KEY = "pk_test_51OPndCSHbLbtEZ3fNbxIvwzX6S8WiYcVdojanDVig57a18RPsT6YsMofUPcCLZUAq4P5JJ3Ids9jUiBiOJpunFr500PFm8iEzJ";

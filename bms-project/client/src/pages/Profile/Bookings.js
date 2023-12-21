@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { HideLoading, ShowLoading } from "../../redux/loadersSlice";
 import { message, Row, Col } from "antd";
-import { GetBookingsOfUser } from "../../apicalls/bookings";
+import { GetBookingsOfUser } from "../../apicalls/bookings.js";
 import moment from "moment";
 
 function Bookings() {

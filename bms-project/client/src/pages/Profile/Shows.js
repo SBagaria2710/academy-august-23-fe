@@ -1,6 +1,6 @@
 import { Col, Form, Modal, Row, Table, message } from "antd";
 import React, { useEffect, useState } from "react";
-import Button from "../../components/Button";
+import Button from "../../components/Button.js";
 import moment from "moment";
 import { HideLoading, ShowLoading } from "../../redux/loadersSlice";
 import { AddShow , DeleteShow, GetAllShowsByTheatre} from "../../apicalls/theatres";

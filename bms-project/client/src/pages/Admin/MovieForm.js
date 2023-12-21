@@ -1,6 +1,6 @@
 import React from "react";
 import { Col, Form, message, Modal, Row } from "antd";
-import Button from "../../components/Button";
+import Button from "../../components/Button.js";
 import { useDispatch } from "react-redux";
 import { HideLoading, ShowLoading } from "../../redux/loadersSlice";
 import { AddMovie, UpdateMovie } from "../../apicalls/movies";
