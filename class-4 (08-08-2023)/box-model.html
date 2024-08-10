@@ -1,27 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Box Model</title>
-
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
     <style>
-        .box {
-            width: 100px;
-            height: 100px;
-            background-color: aqua;
+      * {
+        padding: 0;
+        margin: 0;
+        font-size: 40px;
+      }
 
-            /* padding: top right bottom left; */
-            padding: 10px 20px 30px 40px;
-            margin: 20px;
-            border: 10px solid #000000;
-        }
+      .box-one {
+        background-color: #eb5757;
+        height: 100px;
+        width: 100px;
+        /* padding: 10px;
+        border: 20px solid #9b51e0;
+        margin: 100px; */
+      }
+      
+      .box-two {
+        background-color: #2d9cdb;
+        height: 100px;
+        width: 100px;
+        /* padding: 10px;
+        border: 0 solid ☐ #27ae60;
+        margin: 70px; */
+      }
     </style>
-</head>
-<body>
-    <div style="display: flex;">
-        <div class="box">This is a box</div>
-        <div class="box">This is a box</div>
-    </div>
-</body>
+  </head>
+  <body>
+    <div class="box-one">One</div>
+    <div class="box-two">Two</div>
+  </body>
 </html>
