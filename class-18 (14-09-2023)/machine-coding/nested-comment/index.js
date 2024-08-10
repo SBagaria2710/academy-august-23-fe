@@ -88,16 +88,18 @@ commentContainer.addEventListener("click", function (event) {
   if (target.tagName.toLowerCase() === "button") {
     if (target.classList.contains("reply") && !isCommentOn) {
       isCommentOn = true;
-      target.closest(".main-comment").nextElementSibling.append(createCommentInput());
+      target
+        .closest(".main-comment")
+        .nextElementSibling.append(createCommentInput());
 
       return;
     }
 
     if (target.classList.contains("post")) {
       isCommentOn = false;
-      const comment = target.closest('.comment');
+      const comment = target.closest(".comment");
       const name = comment.children[0].value;
-      const text = comment.children[1].value
+      const text = comment.children[1].value;
 
       if (!name || !text) return;
       target.closest(".sub-comments").appendChild(createComment(name, text));
@@ -107,7 +109,7 @@ commentContainer.addEventListener("click", function (event) {
     }
 
     if (target.classList.contains("cancel")) {
-      target.closest('.comment').remove();
+      target.closest(".comment").remove();
       isCommentOn = false;
 
       return;

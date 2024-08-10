@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="categories">
+      <div class="category" id="headphones">
+        <h2>Headphones</h2>
+        <div class="product">Product A</div>
+        <div class="product">Product B</div>
+      </div>
+      <div class="category" id="laptops">
+        <h2>Laptops</h2>
+        <div class="product">Product X</div>
+        <div class="product">Product Y</div>
+      </div>
+      <div class="category" id="mobiles">
+        <h2>Mobiles</h2>
+        <div class="product">Product P</div>
+        <div class="product">Product Q</div>
+      </div>
+    </div>
+
+    <script>
+      const categoriesContainer = document.getElementById("categories");
+
+      categoriesContainer.addEventListener("click", (event) => {
+        const clickedElement = event.target;
+
+        // Check if the clicked element is a product
+        if (clickedElement.classList.contains("product")) {
+          const category = clickedElement
+            .closest(".category")
+            .querySelector("h2").textContent;
+          const product = clickedElement.textContent;
+
+          console.log(`Clicked on ${product} in the ${category} category.`);
+          // Handle the click action for the product here
+        }
+      });
+    </script>
+  </body>
+</html>
